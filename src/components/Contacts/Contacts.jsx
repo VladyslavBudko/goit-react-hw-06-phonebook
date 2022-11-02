@@ -1,12 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {ContactUl} from './Contacts.styled'
 
 import { nanoid } from 'nanoid';
 
 const ContactList = ({ contacts, onDeleteContact }) => {
   console.log(contacts);
   return (
-    <ul>
+    <ContactUl>
       {contacts.map(({ name, number, id }) => (
         <li key={nanoid()}>
           <p>
@@ -17,7 +18,7 @@ const ContactList = ({ contacts, onDeleteContact }) => {
           </button>
         </li>
       ))}
-    </ul>
+    </ContactUl>
   );
 };
 
