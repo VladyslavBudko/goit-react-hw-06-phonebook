@@ -30,7 +30,7 @@ class ContactForm extends React.Component {
   render() {
     return (
       <>
-        <form onSubmit={this.handleSubmit}>
+        <ContactForm onSubmit={this.handleSubmit}>
           <label htmlFor="">
             Name
             <input
@@ -59,7 +59,7 @@ class ContactForm extends React.Component {
           </label>
           <br />
           <button type="submit">Add contact</button>
-        </form>
+        </ContactForm>
       </>
     );
   }
