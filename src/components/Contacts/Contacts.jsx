@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {ContactUl, ContactLi} from './Contacts.styled'
+import {ContactUl, ContactLi, DelContactBtn} from './Contacts.styled'
 
 import { nanoid } from 'nanoid';
 
@@ -13,9 +13,9 @@ const ContactList = ({ contacts, onDeleteContact }) => {
           <p>
             {name}: {number}
           </p>
-          <button type="button" onClick={() => onDeleteContact(id)}>
+          <DelContactBtn type="DelContactBtn" onClick={() => onDeleteContact(id)}>
             Delete
-          </button>
+          </DelContactBtn>
         </ContactLi>
       ))}
     </ContactUl>

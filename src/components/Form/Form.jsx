@@ -1,5 +1,5 @@
 import React from 'react';
-import {ContactFormLabel, AddContactBtn} from './Form.styled'
+import {Form, ContactFormLabel, AddContactBtn} from './Form.styled'
 
 class ContactForm extends React.Component {
   state = {
@@ -31,7 +31,7 @@ class ContactForm extends React.Component {
   render() {
     return (
       <>
-        <form onSubmit={this.handleSubmit}>
+        <Form onSubmit={this.handleSubmit}>
           <ContactFormLabel htmlFor="">
             Name
             <input
@@ -60,7 +60,7 @@ class ContactForm extends React.Component {
           </ContactFormLabel>
           <br />
           <AddContactBtn type="submit">Add contact</AddContactBtn>
-        </form>
+        </Form>
       </>
     );
   }
