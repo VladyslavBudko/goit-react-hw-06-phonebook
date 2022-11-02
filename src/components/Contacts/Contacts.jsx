@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {ContactUl} from './Contacts.styled'
+import {ContactUl, ContactLi} from './Contacts.styled'
 
 import { nanoid } from 'nanoid';
 
@@ -9,14 +9,14 @@ const ContactList = ({ contacts, onDeleteContact }) => {
   return (
     <ContactUl>
       {contacts.map(({ name, number, id }) => (
-        <li key={nanoid()}>
+        <ContactLi key={nanoid()}>
           <p>
             {name}: {number}
           </p>
           <button type="button" onClick={() => onDeleteContact(id)}>
             Delete
           </button>
-        </li>
+        </ContactLi>
       ))}
     </ContactUl>
   );
