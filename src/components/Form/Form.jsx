@@ -60,20 +60,6 @@ class ContactForm extends React.Component {
           <br />
           <button type="submit">Add contact</button>
         </form>
-
-        {/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */}
-        <label htmlFor="">
-          Find contacts by name
-          <input
-            type="text"
-            name="find"
-            pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-            title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-            required
-            // value={this.state.find}
-            // onChange={this.handleChange}
-          />
-        </label>
       </>
     );
   }
