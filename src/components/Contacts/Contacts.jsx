@@ -1,14 +1,26 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export const Contacts = ({ contacts }) => {
+import { nanoid } from 'nanoid';
+
+const ContactList = ({ contacts, onDeleteContact }) => {
   return (
-    <>
-      <h1>Contacts</h1>
-      <ul>
-        {contacts.map(contact => (
-          <li>{contact}</li>
-        ))}
-      </ul>
-    </>
+    <ul>
+      {contacts.map(({name, number, id}) => (
+        <li key={nanoid()}>
+          <p>{name} {number}</p>
+          <button type="button" onClick={() => onDeleteContact(id)}>
+            Delete
+          </button>
+        </li>
+      ))}
+    </ul>
   );
+};
+
+export default ContactList;
+
+ContactList.propTypes = {
+  contacts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onDeleteContact: PropTypes.func.isRequired,
 };
