@@ -5,7 +5,7 @@ import {ContactUl, ContactLi, DelContactBtn} from './Contacts.styled'
 import { nanoid } from 'nanoid';
 
 const ContactList = ({ contacts, onDeleteContact }) => {
-  console.log(contacts);
+  // console.log(contacts);
   return (
     <ContactUl>
       {contacts.map(({ name, number, id }) => (

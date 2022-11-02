@@ -12,7 +12,7 @@ class ContactForm extends React.Component {
   handleChange = e => {
     const { name, value } = e.currentTarget;
     this.setState({ [name]: value });
-    console.log(this.state);
+    // console.log(this.state);
   };
 
   handleSubmit = event => {
