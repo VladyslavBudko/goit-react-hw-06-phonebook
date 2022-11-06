@@ -1,7 +1,8 @@
 import React from 'react';
 import { Section } from './App.styled';
 import ContactList from './Contacts/Contacts';
-import ContactForm from './Form/Form';
+// import ContactForm from './Form/Form';
+import ContactFormFormik from './FormFofmik/FormFormik';
 import { nanoid } from 'nanoid';
 import Filter from './Filter/Filter';
 
@@ -62,7 +63,8 @@ export class App extends React.Component {
     return (
       <Section>
         <h1>Phonebook</h1>
-        <ContactForm onSubmitData={this.formSubmitHandler}></ContactForm>
+        {/* <ContactForm onSubmitData={this.formSubmitHandler}></ContactForm> */}
+        <ContactFormFormik onSubmitData={this.formSubmitHandler}></ContactFormFormik>
         <h2>Contacts</h2>
         <Filter value={filter} onChange={this.changeFilter} />
         <ContactList
