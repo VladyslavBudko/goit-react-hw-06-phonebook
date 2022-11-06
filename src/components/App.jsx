@@ -1,8 +1,8 @@
 import React from 'react';
 import { Section } from './App.styled';
 import ContactList from './Contacts/Contacts';
-// import ContactForm from './Form/Form';
-import ContactFormFormik from './FormFofmik/FormFormik';
+import ContactForm from './Form/Form';
+// import ContactFormFormik from './FormFofmik/FormFormik';
 import { nanoid } from 'nanoid';
 import Filter from './Filter/Filter';
 
@@ -11,6 +11,12 @@ export class App extends React.Component {
     contacts: [],
     filter: '',
   };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
+  }
 
   formSubmitHandler = data => {
     // console.log(data.name);
@@ -63,8 +69,9 @@ export class App extends React.Component {
     return (
       <Section>
         <h1>Phonebook</h1>
-        {/* <ContactForm onSubmitData={this.formSubmitHandler}></ContactForm> */}
-        <ContactFormFormik onSubmitData={this.formSubmitHandler}></ContactFormFormik>
+        <ContactForm onSubmitData={this.formSubmitHandler}></ContactForm>
+        {/* !!!!! Формик не работает, исправить */}
+        {/* <ContactFormFormik onSubmitData={this.formSubmitHandler}></ContactFormFormik> */}
         <h2>Contacts</h2>
         <Filter value={filter} onChange={this.changeFilter} />
         <ContactList

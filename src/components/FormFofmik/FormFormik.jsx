@@ -39,8 +39,7 @@ const ContactFormFormik = ({ onSubmit }) => {
     console.log(values);
     onSubmit(values);
     resetForm();
-  };
-
+  }
   return (
     <Formik
       initialValues={initialValues}
