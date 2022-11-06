@@ -1,59 +1,63 @@
-import React from 'react';
+// import React from 'react';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
 // import {Form, ContactFormLabel, AddContactBtn} from './FormFormik.styled'
 
-class ContactFormFormik extends React.Component {
-  state = {
-    name: '',
-    number: '',
-  };
+const initialValues = {
+  name: '',
+  number: '',
+};
 
+const validationSchema = Yup.object({
+  contactName: Yup.string()
+    .min(2, 'Too short!')
+    .max(30, 'Too long!')
+    .required(),
+  contactNnumber: Yup.string().min(2, 'Too short!').max(30, 'Too long!')
+    .required(),
+});
 
+// !!!!!!!!!!!!!!!!!!!!!!!!
+//   handleChange = e => {
+//     const { name, value } = e.currentTarget;
+//     this.setState({ [name]: value });
+//     // console.log(this.state);
+//   };
 
-  handleChange = e => {
-    const { name, value } = e.currentTarget;
-    this.setState({ [name]: value });
-    // console.log(this.state);
-  };
+//   handleSubmit = event => {
+//     event.preventDefault();
+//     this.props.onSubmitData(this.state);
+//     this.reset();
+//   };
 
-  handleSubmit = event => {
-    event.preventDefault();
-    this.props.onSubmitData(this.state);
-    this.reset();
-  };
-
-  reset = () => {
-    this.setState({ name: '', number: '' });
-  };
-
-  // !!!!!!!!!!!!!!!!!!!!!!!
-
-  handleSubmitFormik = (values, action) => {
+//   reset = () => {
+//     this.setState({ name: '', number: '' });
+//   };
+// !!!!!!!!!!!!!!!!!!!!!!!
+const ContactFormFormik = ({ onSubmit }) => {
+  const handleSubmitFormik = (values, { resetForm }) => {
     console.log(values);
+    onSubmit(values);
+    resetForm();
   };
 
-  render() {
-    return (
-      <Formik
-        initialValues={{ name: '', number: '' }}
-        onSubmit={this.handleSubmitFormik}
-      >
-        <Form>
-          <label htmlFor="">
-            Name
-            <Field type="text" name="name"></Field>
-          </label>
+  return (
+    <Formik
+      initialValues={initialValues}
+      onSubmit={handleSubmitFormik}
+      validationSchema={validationSchema}
+    >
+      <Form autoComplete="off">
+        <label htmlFor="">Name</label>
+        <Field type="text" name="contactName"></Field>
 
-          <label htmlFor="">
-            Number
-            <Field type="tel" name="number"></Field>
-          </label>
-          <br />
-          <button type="submit">Add contact</button>
-        </Form>
+        <label htmlFor="">Number</label>
+        <Field type="tel" name="contactNnumber"></Field>
+        <br />
+        <button type="submit">Add contact</button>
+      </Form>
 
-        {/* <Form>
+      {/* <Form>
           <label htmlFor="">
             Name
             <Field
@@ -66,8 +70,8 @@ class ContactFormFormik extends React.Component {
               onChange={this.handleChange}
             />
           </label> */}
-        {/* <br /> */}
-        {/* <label htmlFor="">
+      {/* <br /> */}
+      {/* <label htmlFor="">
             Number
             <Field
               type="tel"
@@ -80,10 +84,10 @@ class ContactFormFormik extends React.Component {
             />
           </label>
           <br /> */}
-        {/* <button type="submit">Add contact</button> */}
-        {/* </Form> */}
-      </Formik>
-    );
-  }
-}
+      {/* <button type="submit">Add contact</button> */}
+      {/* </Form> */}
+    </Formik>
+  );
+};
+
 export default ContactFormFormik;
