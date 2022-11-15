@@ -8,7 +8,7 @@ const ContactList = ({ contacts, onDeleteContact }) => {
   // console.log(contacts);
   return (
     <ContactUl>
-      {contacts.map(({ name, number, id }) => (
+      {contacts && contacts.map(({ name, number, id }) => (
         <ContactLi key={nanoid()}>
           <p>
             {name}: {number}
