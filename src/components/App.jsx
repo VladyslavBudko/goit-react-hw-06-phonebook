@@ -6,31 +6,18 @@ import ContactForm from './Form/Form';
 import { nanoid } from 'nanoid';
 import Filter from './Filter/Filter';
 
-// const useLocalStorage = ( key, defaultValue) => {
-//   const [satate, setState] = useState(() => {
-//     const contacts = localStorage.getItem('contacts');
-//     return  parsedContacts = JSON.parse(contacts);
-//   });
-//   return [satate, setState];
-// }
 
 export function App() {
-  const [contacts, setContacts] = useState([]);
+  const [contacts, setContacts] = useState(() =>
+    JSON.parse(localStorage.getItem('contacts')) ?? []
+  );
   const [filter, setFilter] = useState('');
-
-  useEffect(() => {
-    const parsedContacts = JSON.parse(localStorage.getItem('contacts'));
-    if (parsedContacts) {
-      setContacts(prevState => prevState + parsedContacts);
-    }
-  }, []);
 
   useEffect(() => {
     localStorage.setItem('contacts', JSON.stringify(contacts));
   }, [contacts]);
 
   const formSubmitHandler = data => {
-    // console.log(data.name);
     const { name, number } = data;
 
     const newContact = {
@@ -39,31 +26,34 @@ export function App() {
       number,
     };
 
-    const isNameExist = contacts.some(
-      newContact => newContact.name.toLowerCase() === name.toLowerCase()
-    );
+    if (contacts) {
+      const isNameExist = contacts.some(
+        newContact => newContact.name.toLowerCase() === name.toLowerCase()
+      );
 
-    if (isNameExist) {
-      alert(`${name} is alredy in contacts`);
-      return;
+      if (isNameExist) {
+        alert(`${name} is alredy in contacts`);
+        return;
+      }
     }
 
     setContacts(prevState => [newContact, ...prevState]);
   };
 
   const changeFilter = e => {
-    setFilter(prevState => prevState + e.currentTarget.value);
+    setFilter(e.currentTarget.value);
   };
 
   const getVisibleContacts = () => {
     const normalizedFilter = filter.toLowerCase();
-    console.log(contacts)
-    if (contacts) {
+    if (contacts.length !== 0) {
       return contacts.filter(contact =>
         contact.name.toLowerCase().includes(normalizedFilter)
       );
     }
   };
+  
+  const visibleContacts = getVisibleContacts();
 
   const onDeleteContact = contactId => {
     setContacts(prevState =>
@@ -71,8 +61,6 @@ export function App() {
     );
   };
 
-  const visibleContacts = getVisibleContacts();
-  console.log(visibleContacts)
 
   return (
     <Section>
@@ -80,10 +68,12 @@ export function App() {
       <ContactForm onSubmitData={formSubmitHandler}></ContactForm>
       <h2>Contacts</h2>
       <Filter value={filter} onChange={changeFilter} />
-      <ContactList
-        contacts={visibleContacts}
-        onDeleteContact={onDeleteContact}
-      />
+      {visibleContacts && (
+        <ContactList
+          contacts={visibleContacts}
+          onDeleteContact={onDeleteContact}
+        />
+      )}
     </Section>
   );
 }
