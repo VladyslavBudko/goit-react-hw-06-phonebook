@@ -6,10 +6,9 @@ import ContactForm from './Form/Form';
 import { nanoid } from 'nanoid';
 import Filter from './Filter/Filter';
 
-
 export function App() {
-  const [contacts, setContacts] = useState(() =>
-    JSON.parse(localStorage.getItem('contacts')) ?? []
+  const [contacts, setContacts] = useState(
+    () => JSON.parse(localStorage.getItem('contacts')) ?? []
   );
   const [filter, setFilter] = useState('');
 
@@ -57,10 +56,9 @@ export function App() {
 
   const onDeleteContact = contactId => {
     setContacts(prevState =>
-      prevState.contacts.filter(contact => contact.id !== contactId)
+      prevState.filter(contact => contact.id !== contactId)
     );
   };
-
 
   return (
     <Section>

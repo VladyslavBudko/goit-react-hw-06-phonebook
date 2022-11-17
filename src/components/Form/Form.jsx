@@ -1,7 +1,6 @@
 // import React from 'react';
 import { Form, ContactFormLabel, AddContactBtn } from './Form.styled';
 import { useState } from 'react';
-import { useContext } from 'react';
 
 const ContactForm = ({ onSubmitData }) => {
   const [name, setName] = useState('');
@@ -24,8 +23,8 @@ const ContactForm = ({ onSubmitData }) => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    const data = { name, number };
-    onSubmitData(data);
+    onSubmitData({ name, number });
+
     reset();
   };
 
