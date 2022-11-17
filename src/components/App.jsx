@@ -52,7 +52,7 @@ export function App() {
       );
     }
   };
-  
+
   const visibleContacts = getVisibleContacts();
 
   const onDeleteContact = contactId => {
