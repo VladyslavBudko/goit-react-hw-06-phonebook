@@ -2,6 +2,9 @@
 import { Form, ContactFormLabel, AddContactBtn } from './Form.styled';
 import { useState } from 'react';
 
+// import { useDispatch } from 'react-redux';
+//   const dispatch = useDispatch();
+
 const ContactForm = ({ onSubmitData }) => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
