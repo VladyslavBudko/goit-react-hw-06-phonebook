@@ -6,7 +6,7 @@ import { nanoid } from 'nanoid';
 // import { useSelector, useDispatch } from 'react-redux';
 
 const ContactList = ({ contacts, onDeleteContact }) => {
-  // const contactsState = useSelector(state => state.contactsValue);
+  // const contactsState = useSelector(state => state.contactsList);
   // const dispatch = useDispatch();
 
   return (
