@@ -9,6 +9,14 @@ import { persistedContactsReducer } from './Slices/ContactsSlice';
 import { filterSlice } from './Slices/FilterSlice';
 
 import { persistStore } from 'redux-persist';
+import {
+    FLUSH,
+    REHYDRATE,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER,
+  } from 'redux-persist'
 
 // const contacts = createAction('contactsValue/contacts');
 // const filter = createAction('filterValue/contacts');
@@ -27,6 +35,14 @@ export const store = configureStore({
     contactsList: persistedContactsReducer,
     filterQueue: filterSlice.reducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
+
+// !!!!!!!!!!!! add middleware
 
 export const persistor = persistStore(store);
