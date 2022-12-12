@@ -2,35 +2,12 @@ import {
   configureStore,
   //   createAction,
   //   createReducer,
-  createSlice,
+  //   createSlice,
 } from '@reduxjs/toolkit';
 
-const contactsSlice = createSlice({
-  name: 'contactsSlice',
-  initialState: [1111],
-  reducers: {
-    contactsAdd(state, action) {
-      state.push(action.payload);
-    },
-    contactsRemove(state, action) {
-      return state.filter(item => item.id !== action.payload);
-    },
-  },
-});
-
-export const { contacts } = contactsSlice.actions;
-
-const filterSlice = createSlice({
-  name: 'filterSlice',
-  initialState: 'ffffff',
-  filter: {
-    filter(state, action) {
-      return state + action.payload;
-    },
-  },
-});
-
-export const { filter } = filterSlice.actions;
+import { filterSlice, contactsSlice } from './slices';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 
 // const contacts = createAction('contactsValue/contacts');
 // const filter = createAction('filterValue/contacts');
@@ -42,16 +19,23 @@ export const { filter } = filterSlice.actions;
 //   [filter]: (state, action) => state + action.payload,
 // });
 
+const persistConfig = {
+  key: 'contacts',
+  storage,
+};
+
+const persistedContactsReducer = persistReducer(
+  persistConfig,
+  contactsSlice.reducer
+);
+
 export const store = configureStore({
   reducer: {
     // contactsList: contactsReducer,
     // filterQueue: filterReducer,
-    contactsList: contactsSlice.reducer,
+    contactsList: persistedContactsReducer,
     filterQueue: filterSlice.reducer,
   },
 });
 
-// {
-//     contacts: [],
-//     filter: ""
-//   }
+export const persistor = persistStore(store);
