@@ -5,9 +5,10 @@ import {
   //   createSlice,
 } from '@reduxjs/toolkit';
 
-import { filterSlice, contactsSlice } from './slices';
-import { persistStore, persistReducer } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';
+import { persistedContactsReducer } from './Slices/ContactsSlice';
+import { filterSlice } from './Slices/FilterSlice';
+
+import { persistStore } from 'redux-persist';
 
 // const contacts = createAction('contactsValue/contacts');
 // const filter = createAction('filterValue/contacts');
@@ -18,16 +19,6 @@ import storage from 'redux-persist/lib/storage';
 // const filterReducer = createReducer('ffff', {
 //   [filter]: (state, action) => state + action.payload,
 // });
-
-const persistConfig = {
-  key: 'contacts',
-  storage,
-};
-
-const persistedContactsReducer = persistReducer(
-  persistConfig,
-  contactsSlice.reducer
-);
 
 export const store = configureStore({
   reducer: {
