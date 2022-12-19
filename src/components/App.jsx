@@ -5,6 +5,7 @@ import ContactForm from './Form/Form';
 // import ContactFormFormik from './FormFofmik/FormFormik';
 import { nanoid } from 'nanoid';
 import Filter from './Filter/Filter';
+import { useSelector, useDispatch } from 'react-redux';
 
 export function App() {
   const [contacts, setContacts] = useState(
@@ -12,9 +13,12 @@ export function App() {
   );
   const [filter, setFilter] = useState('');
 
-  useEffect(() => {
-    localStorage.setItem('contacts', JSON.stringify(contacts));
-  }, [contacts]);
+  const contactsState = useSelector(state => state.contactsList);
+  const dispatch = useDispatch();
+
+  // useEffect(() => {
+  //   localStorage.setItem('contacts', JSON.stringify(contacts));
+  // }, [contacts]);
 
   const formSubmitHandler = data => {
     const { name, number } = data;

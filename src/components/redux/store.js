@@ -18,20 +18,8 @@ import {
     REGISTER,
   } from 'redux-persist'
 
-// const contacts = createAction('contactsValue/contacts');
-// const filter = createAction('filterValue/contacts');
-
-// const contactsReducer = createReducer([11111], {
-//   [contacts]: (state, action) => state + action.payload,
-// });
-// const filterReducer = createReducer('ffff', {
-//   [filter]: (state, action) => state + action.payload,
-// });
-
 export const store = configureStore({
   reducer: {
-    // contactsList: contactsReducer,
-    // filterQueue: filterReducer,
     contactsList: persistedContactsReducer,
     filterQueue: filterSlice.reducer,
   },
@@ -43,6 +31,5 @@ export const store = configureStore({
     }),
 });
 
-// !!!!!!!!!!!! add middleware
 
 export const persistor = persistStore(store);

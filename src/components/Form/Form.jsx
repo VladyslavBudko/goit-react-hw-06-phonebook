@@ -51,9 +51,7 @@ const ContactForm = ({ onSubmitData }) => {
             onChange={handleChange}
           />
         </ContactFormLabel>
-        {/* <br /> */}
         <ContactFormLabel htmlFor="">
-          {' '}
           Number
           <input
             type="tel"
